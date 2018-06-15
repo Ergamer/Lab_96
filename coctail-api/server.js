@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 const config = require('./config');
 const users = require('./app/users');
-const coctails = require('./app/coctails');
+const cocktails = require('./app/cocktails');
 
 const app = express();
 
@@ -18,7 +18,7 @@ const db = mongoose.connection;
 db.once('open', () => {
   console.log('Mongoose connected!');
 
-  app.use('coctails', coctails());
+  app.use('/cocktails', cocktails());
   app.use('/users', users());
 
 

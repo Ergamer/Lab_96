@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import './App.css';
+import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
+
 import Layout from "./containers/Layout/Layout";
-import {Route, Switch} from "react-router-dom";
-import Login from "./containers/Login/Login";
+import Routes from "./Routes";
 
 
 class App extends Component {
   render() {
     return (
       <Layout>
-        <Switch>
-          {/*<Route path="/eventcalendar" exact component={EventCalendar}/>*/}
-          <Route path="/login" exact component={Login}/>
-        </Switch>
-
+          <Routes user={this.props.user} />
       </Layout>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.users.user
+});
+
+export default withRouter(connect(mapStateToProps)(App));

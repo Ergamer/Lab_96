@@ -1,7 +1,7 @@
 const mongoosee = require('mongoose');
 const Schema = mongoosee.Schema;
 
-const CoctailSchema = new Schema({
+const CocktailSchema = new Schema({
   title: {
     type: String,
     required: true
@@ -13,8 +13,7 @@ const CoctailSchema = new Schema({
     required: true
   },
   image: {
-    type: String,
-    required: true
+    type: String
   },
   recipe: {
     type: String,
@@ -30,7 +29,7 @@ const CoctailSchema = new Schema({
       type: String,
       required: true
     },
-    value: {
+    amount: {
       type: String,
       required: true
     }
@@ -48,6 +47,6 @@ const CoctailSchema = new Schema({
   }]
 });
 
-const Coctail = mongoosee.model('Coctail', CoctailSchema);
+const Cocktail = mongoosee.model('Cocktail', CocktailSchema);
 
-module.exports = Coctail;
+module.exports = Cocktail;

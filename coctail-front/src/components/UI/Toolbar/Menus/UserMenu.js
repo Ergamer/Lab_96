@@ -3,7 +3,6 @@ import {MenuItem, Nav, NavDropdown} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 
 const UserMenu = ({user, logout}) => {
-  console.log(user);
   const navTitle = (
     <Fragment>
       Hello, <b>{user.name}</b>!

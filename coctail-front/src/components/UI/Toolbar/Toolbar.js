@@ -9,14 +9,17 @@ const Toolbar = ({user, logout}) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <LinkContainer to="/" exact><a>Event calendar</a></LinkContainer>
+        <LinkContainer to="/" exact><a>Coctail Builder</a></LinkContainer>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
     <Navbar.Collapse>
       <Nav>
         <LinkContainer to="/" exact>
-          <NavItem>Events</NavItem>
+          <NavItem>Coctails</NavItem>
+        </LinkContainer>
+        <LinkContainer to="/cocktails/new" exact>
+          <NavItem>New Coctail</NavItem>
         </LinkContainer>
       </Nav>
 

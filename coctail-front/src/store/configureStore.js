@@ -4,12 +4,14 @@ import createHistory from "history/createBrowserHistory";
 import createSagaMiddleware from 'redux-saga';
 
 import userReducer from "./reducers/users";
+import cocktailReducer from "./reducers/cocktails";
 import {watchLoginFacebook} from "./sagas";
 import {loadState, saveState} from "./localStorage";
 
 
 const rootReducer = combineReducers({
   users: userReducer,
+  cocktails: cocktailReducer,
   routing: routerReducer
 });
 
