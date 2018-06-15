@@ -50,9 +50,12 @@ const createRouter = () => {
         user.save();
       }
 
-      let token = user.generateToken();
+      user.token = nanoid(20);
+      user = await user.save();
 
-      return res.send({message: 'Login or register successful', user, token});
+      console.log(user)
+
+      return res.send({message: 'Login or register successful', user});
     } catch (error) {
       return res.status(401).send({message: 'Facebook token incorrect'});
     }

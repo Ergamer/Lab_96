@@ -4,8 +4,12 @@ import {push} from "react-router-redux";
 import axios from '../../axios-api';
 import {createCocktailSuccess, fetchCocktailsSuccess} from "../actions/cocktails";
 
-export function* createCocktailSaga(cocktailData, token) {
-  yield axios.post('/cocktails', cocktailData, {headers: {'Token': token}});
+export function* createCocktailSaga(newCocktail) {
+
+    console.log(action.token)
+  yield axios.post('/cocktails',
+      let newCocktail = JSON.stringify(action.cocktailData, {headers: {'Token': action.token}}
+);
   yield put(createCocktailSuccess());
   yield put(push('/'));
 }

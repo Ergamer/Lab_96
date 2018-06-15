@@ -18,7 +18,9 @@ class CocktailForm extends Component {
       formData.append(key, this.state[key]);
     });
 
-    this.props.onSubmit(formData);
+    console.log(this.props.user.token)
+
+    this.props.onSubmit(formData, this.props.user.token);
   };
 
   inputChangeHandler = event => {

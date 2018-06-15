@@ -1,4 +1,4 @@
 export default {
   apiUrl: 'http://localhost:8000/',
-  facebookAppId: '173688026658472'
+  facebookAppId: '373528869806549'
 };

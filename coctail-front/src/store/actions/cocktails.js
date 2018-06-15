@@ -9,10 +9,12 @@ export const fetchCocktails = () => {
   return {type: FETCH_COCKTAILS};
 };
 
-export const createCocktailSuccess = (cocktailData, token) => {
-  return {type: CREATE_COCKTAIL_SUCCESS, cocktailData, token};
+export const createCocktailSuccess = (newCocktail) => {
+
+  return {type: CREATE_COCKTAIL_SUCCESS, newCocktail};
 };
 
-export const  createCocktail = () => {
-  return {type: CREATE_COCKTAIL};
+export const  createCocktail = (cocktailData, token) => {
+    console.log(token)
+  return {type: CREATE_COCKTAIL, cocktailData, token};
 };

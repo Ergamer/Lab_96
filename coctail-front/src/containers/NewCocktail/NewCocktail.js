@@ -11,8 +11,8 @@ class NewCocktail extends Component {
   //   this.props.cocktailCreated();
   // }
 
-  createCocktail = (cocktailData, accessToken) => {
-    this.props.cocktailCreated(cocktailData, this.props.users.accessToken);
+  createCocktail = (cocktailData, token) => {
+    this.props.cocktailCreated(cocktailData, token);
     console.log(this.props.users);
   };
 
@@ -23,6 +23,7 @@ class NewCocktail extends Component {
         <PageHeader>New cocktail</PageHeader>
         <CocktailForm
           onSubmit={this.createCocktail}
+          user={this.props.users}
           // categories={this.props.categories}
         />
       </Fragment>
@@ -31,7 +32,7 @@ class NewCocktail extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  cocktailCreated: cocktailData =>  dispatch(createCocktail(cocktailData))
+  cocktailCreated: (cocktailData, token) =>  dispatch(createCocktail(cocktailData, token))
   }
 );
 

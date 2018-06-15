@@ -13,7 +13,7 @@ export const loginFacebookFailure = error => {
 };
 
 export const loginFacebook = (data, token )=> {
-  console.log(data)
+  console.log(token)
   return {type: LOGIN_FACEBOOK, data, token};
 };
 

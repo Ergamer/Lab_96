@@ -7,11 +7,11 @@ module.exports = {
   uploadPath: path.join(rootPath, '/public/uploads'),
   db: {
     url: 'mongodb://localhost:27017',
-    name: 'coctail'
+    name: 'cocktail'
   },
   facebook: {
-    appId: "173688026658472", // Enter your app ID here
-    appSecret: "a94716239e361ad2131a51d23bacfee9" // Enter your app secret here
+    appId: "373528869806549", // Enter your app ID here
+    appSecret: "62387963e94ec7026dd627a2fe9673ee" // Enter your app secret here
   }
 };
 
