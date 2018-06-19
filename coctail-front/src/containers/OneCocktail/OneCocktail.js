@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Panel} from "react-bootstrap";
-import {getOneCocktail} from "../../store/actions/cocktails";
+import {deleteOneCocktail, getOneCocktail} from "../../store/actions/cocktails";
+import {Link} from "react-router-dom";
 
 
 class OneCocktail extends Component{
@@ -31,6 +32,8 @@ class OneCocktail extends Component{
                                 })}
                             </div>
                             <p>Recipe: {this.props.cocktail.recipe}</p>
+                            <button onClick={() => this.props.deleteOneCocktail(this.props.cocktail._id)}>Remove cocktail</button>
+                            <Link to={"/editor/" + this.props.cocktail._id}>Edit cocktail</Link>
                         </div>
                     </Panel.Body>: null
             }
@@ -51,7 +54,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getOneCocktail: (id) => dispatch(getOneCocktail(id))
+        getOneCocktail: (id) => dispatch(getOneCocktail(id)),
+        deleteOneCocktail: (id) => dispatch(deleteOneCocktail(id))
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(OneCocktail);

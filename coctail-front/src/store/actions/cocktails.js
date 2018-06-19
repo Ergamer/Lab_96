@@ -1,5 +1,8 @@
 import axios from '../../axios-api';
-import {CREATE_COCKTAIL_SUCCESS, FETCH_COCKTAIL_SUCCESS, FETCH_ONE_COCKTAIL_SUCCESS} from "./actionTypes";
+import {
+    CREATE_COCKTAIL_SUCCESS, FETCH_COCKTAIL_SUCCESS, FETCH_ONE_COCKTAIL_SUCCESS,
+    ONE_COCKTAIL_DELETE_SUCCESS
+} from "./actionTypes";
 import {push} from "react-router-redux";
 
 
@@ -42,8 +45,31 @@ export const getOneCocktail = (id) => {
     return dispatch => {
         return axios.get('/cocktails/' + id).then(
             response => {
-                dispatch(fetchOneCocktailSuccess(response.data))
+                return dispatch(fetchOneCocktailSuccess(response.data))
             }
         )
     }
+};
+
+
+export const deleteOneCocktail = (id) => {
+  return (dispatch, getState) => {
+      const token = getState().users.user.token;
+      const headers = {'Auth-Token': token};
+      return axios.delete('/cocktails/' + id, {headers}).then(() => {
+          dispatch(push('/'));
+          }
+      )
+  }
+};
+
+export const saveCocktailChanges = (id, oneCocktailData) => {
+  return (dispatch, getState) => {
+      const token = getState().users.user.token;
+      const headers = {'Auth-Token': token};
+      return axios.put('/cocktails/' + id, oneCocktailData, {headers}).then(() => {
+        dispatch(push('/'));
+      }
+    )
+  }
 };

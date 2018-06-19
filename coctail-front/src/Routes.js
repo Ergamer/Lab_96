@@ -6,6 +6,7 @@ import NewCocktail from "./containers/NewCocktail/NewCocktail";
 import Login from "./containers/Login/Login";
 import Cocktails from "./containers/Cocktails/Cocktails";
 import OneCocktail from "./containers/OneCocktail/OneCocktail";
+import CocktailEditorForm from "./components/CocktailEditorForm/CocktailEditorForm";
 
 const ProtectedRoute = ({isAllowed, ...props}) => (
   isAllowed ? <Route {...props}/> : <Redirect to="/login" />
@@ -20,8 +21,9 @@ const Routes = ({user}) => (
           exact
           component={NewCocktail}
       />
-    <Route path="/cocktails/:id" exact component={OneCocktail}/>
-    {/*<Route path="/register" exact component={Register}/>*/}
+      <Route path="/cocktails/:id" exact component={OneCocktail}/>
+      <Route path="/editor/:id" exact component={CocktailEditorForm}/>
+      {/*<Route path="/register" exact component={Register}/>*/}
     <Route path="/login" exact component={Login}/>
   </Switch>
 );

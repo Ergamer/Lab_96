@@ -43,7 +43,7 @@ const createRouter = () => {
             .catch(() => res.sendStatus(500));
     });
 
-  router.post('/', [auth, permit('user', 'admin')], upload.single('image'), (req, res) => {
+  router.post('/', [auth, permit('user', 'admin'), upload.single('image')], (req, res) => {
     const cocktailData = req.body;
 
     if (req.file) {
@@ -71,14 +71,35 @@ const createRouter = () => {
       .then(newCocktail => res.send(newCocktail))
       .catch(error => res.status(400).send(error));
   });
+  router.put('/:id', [auth, permit('admin'), upload.single('image')], async (req, res) => {
+      const cocktailData = req.body;
+
+      const cocktail = await Cocktail.findOne({_id: req.params.id});
+
+      if (req.file) {
+          cocktail.image = req.file.filename;
+      } else {
+          cocktail.image = null;
+      }
+      cocktail.title = req.body.title;
+      console.log(cocktail)
+      cocktail.ingredients = JSON.parse(req.body.ingredients);
+
+      cocktail.recipe = req.body.recipe;
+
+
+      cocktail.save()
+          .then(cocktail => res.send(cocktail))
+          .catch(error => res.status(400).send(error));
+  });
 
   router.delete('/:id', auth, async (req, res) => {
     const cocktail = await Cocktail.findOne({_id: req.params.id});
 
-    if(cocktail.user.toString() !== req.user._id) return res.status(403).send({error: 'Permission denied'});
+    if(cocktail.user.toString() !== req.user._id.toString()) return res.status(403).send({error: 'Permission denied'});
 
     cocktail.remove()
-      .then(() => res.send('Artist was deleted!'))
+      .then(() => res.send('Cocktail was deleted!'))
       .catch(error => res.status(400).send(error));
   });
 

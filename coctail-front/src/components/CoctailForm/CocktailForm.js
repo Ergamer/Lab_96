@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Button, Col, Form, FormGroup} from "react-bootstrap";
 import FormElement from "../UI/Form/FormElement";
+import {deleteOneCocktail, getOneCocktail, saveCocktailChanges} from "../../store/actions/cocktails";
+import {connect} from "react-redux";
 
 class CocktailForm extends Component {
   state = {
@@ -142,4 +144,18 @@ class CocktailForm extends Component {
   }
 }
 
-export default CocktailForm;
+const mapStateToProps = state => {
+    return {
+        cocktails: state.cocktails.cocktails,
+        users: state.users.user,
+        cocktail: state.cocktails.cocktail
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getOneCocktail: (id) => dispatch(getOneCocktail(id)),
+        deleteOneCocktail: (id) => dispatch(deleteOneCocktail(id)),
+    }
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CocktailForm);

@@ -28,7 +28,6 @@ const CocktailList = props => {
         <strong style={{marginLeft: '10px',marginRight: '10px'}}>
           Created by: {props.user}
         </strong>
-        {/*<button>Remove cocktail</button>*/}
       </Panel.Body>
     </Panel>
   );
