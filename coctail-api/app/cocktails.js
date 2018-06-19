@@ -24,7 +24,7 @@ const router = express.Router();
 
 const createRouter = () => {
   router.get('/', (req, res) => {
-    Cocktail.find({published: true})
+    Cocktail.find().populate('user')
       .then(cocktails => res.send(cocktails))
       .catch(() => res.sendStatus(500))
   });
@@ -34,6 +34,14 @@ const createRouter = () => {
       .then(cocktails => res.send(cocktails))
       .catch(() => res.sendStatus(500))
   });
+    router.get('/:id', (req, res) => {
+      console.log(req.params.id)
+        Cocktail.findOne({_id: req.params.id})
+            .then(cocktail => {
+              res.send(cocktail)
+            })
+            .catch(() => res.sendStatus(500));
+    });
 
   router.post('/', [auth, permit('user', 'admin')], upload.single('image'), (req, res) => {
     const cocktailData = req.body;
@@ -43,8 +51,12 @@ const createRouter = () => {
     } else {
       cocktailData.image = null;
     }
+    cocktailData.ingredients = JSON.parse(cocktailData.ingredients);
+
+    cocktailData.user = req.user;
 
     const cocktail = new Cocktail(req.body);
+
 
     cocktail.save()
       .then(cocktail => res.send(cocktail))

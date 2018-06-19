@@ -7,13 +7,13 @@ import config from '../../config';
 import notFound from '../../assets/images/not-found.png';
 
 const CocktailList = props => {
-  console.log('fiyfuytf');
+  console.log(props);
   let image = notFound;
 
   if (props.image) {
     image = config.apiUrl + '/uploads/' + props.image;
   }
-
+  console.log(props.user)
   return (
     <Panel>
       <Panel.Body>
@@ -25,9 +25,10 @@ const CocktailList = props => {
         <Link to={'/cocktails/' + props.id}>
           {props.title}
         </Link>
-        <strong style={{marginLeft: '10px'}}>
-          {props.user}
+        <strong style={{marginLeft: '10px',marginRight: '10px'}}>
+          Created by: {props.user}
         </strong>
+        {/*<button>Remove cocktail</button>*/}
       </Panel.Body>
     </Panel>
   );

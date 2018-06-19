@@ -15,7 +15,12 @@ class CocktailForm extends Component {
 
     const formData = new FormData();
     Object.keys(this.state).forEach(key => {
-      formData.append(key, this.state[key]);
+      if(key === 'ingredients') {
+          formData.append(key, JSON.stringify(this.state[key]));
+      } else {
+          formData.append(key, this.state[key]);
+      }
+
     });
 
     console.log(this.props.user.token)
@@ -31,13 +36,15 @@ class CocktailForm extends Component {
 
   ingredientsChangeHandler = (id, event) => {
     const ingredients = [...this.state.ingredients];
-    ingredients[id][event.target.name] = event.target.value;
+    const currentObject = ingredients[id];
+    currentObject[event.target.name] = event.target.value;
+    ingredients[id] = currentObject;
     this.setState({ingredients: ingredients})
   };
 
   addIngredient = () => {
     let ingredients = [...this.state.ingredients];
-    ingredients.push(this.state.ingredients);
+    ingredients.push({name: '', amount: ''});
     this.setState({ingredients: ingredients});
   };
 

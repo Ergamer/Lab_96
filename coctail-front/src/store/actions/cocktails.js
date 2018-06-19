@@ -1,4 +1,6 @@
-import {CREATE_COCKTAIL, CREATE_COCKTAIL_SUCCESS, FETCH_COCKTAIL_SUCCESS, FETCH_COCKTAILS} from "./actionTypes";
+import axios from '../../axios-api';
+import {CREATE_COCKTAIL_SUCCESS, FETCH_COCKTAIL_SUCCESS, FETCH_ONE_COCKTAIL_SUCCESS} from "./actionTypes";
+import {push} from "react-router-redux";
 
 
 export const fetchCocktailsSuccess = cocktails => {
@@ -6,15 +8,42 @@ export const fetchCocktailsSuccess = cocktails => {
 };
 
 export const fetchCocktails = () => {
-  return {type: FETCH_COCKTAILS};
+  return dispatch => {
+      return axios.get('/cocktails').then(
+          response => dispatch(fetchCocktailsSuccess(response.data))
+      )
+  };
 };
 
-export const createCocktailSuccess = (newCocktail) => {
-
-  return {type: CREATE_COCKTAIL_SUCCESS, newCocktail};
+export const createCocktailSuccess = () => {
+  return {type: CREATE_COCKTAIL_SUCCESS};
 };
 
-export const  createCocktail = (cocktailData, token) => {
-    console.log(token)
-  return {type: CREATE_COCKTAIL, cocktailData, token};
+export const  createCocktail = (cocktailData) => {
+  return (dispatch, getState) => {
+      const token = getState().users.user.token;
+      console.log(token)
+      const headers = {'Auth-Token': token};
+      return axios.post('/cocktails', cocktailData, {headers}).then(
+          response => {
+              dispatch(createCocktailSuccess());
+              dispatch(push('/'));
+          }
+
+      )
+  }
+};
+
+export const fetchOneCocktailSuccess = (cocktail) => {
+    return {type: FETCH_ONE_COCKTAIL_SUCCESS, cocktail}
+};
+
+export const getOneCocktail = (id) => {
+    return dispatch => {
+        return axios.get('/cocktails/' + id).then(
+            response => {
+                dispatch(fetchOneCocktailSuccess(response.data))
+            }
+        )
+    }
 };

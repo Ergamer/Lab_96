@@ -31,7 +31,7 @@ class Cocktails extends Component {
             key={cocktail._id}
             id={cocktail._id}
             title={cocktail.title}
-            user={cocktail.user}
+            user={cocktail.user.displayName}
             image={cocktail.image}
           />
         ))}

@@ -13,7 +13,6 @@ class NewCocktail extends Component {
 
   createCocktail = (cocktailData, token) => {
     this.props.cocktailCreated(cocktailData, token);
-    console.log(this.props.users);
   };
 
   render() {
