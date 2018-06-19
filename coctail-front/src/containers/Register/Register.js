@@ -1,11 +1,11 @@
 import React, {Component, Fragment} from 'react';
 import {connect} from 'react-redux';
-import {Alert, Button, Col, Form, FormGroup, PageHeader} from "react-bootstrap";
+import {Button, Col, Form, FormGroup, PageHeader} from "react-bootstrap";
+import {registerUser} from "../../store/actions/users";
 import FormElement from "../../components/UI/Form/FormElement";
-import {loginUser} from "../../store/actions/users";
 import FacebookLogin from "../../components/Auth/FacebookLogin/FacebookLogin";
-
-class Login extends Component {
+import config from "../../config";
+class Register extends Component {
   state = {
     username: '',
     password: ''
@@ -20,21 +20,35 @@ class Login extends Component {
   submitFormHandler = event => {
     event.preventDefault();
 
-    this.props.loginUser(this.state);
+    this.props.registerUser(this.state);
+  };
+
+  fieldHasError = fieldName => {
+    return this.props.error && this.props.error.errors[fieldName];
+  };
+
+  facebookResponse = response => {
+    if (response.id) {
+      this.props.facebookLogin(response);
+    }
   };
 
   render() {
     return (
       <Fragment>
-        <PageHeader>Login</PageHeader>
+        <PageHeader>Register new user</PageHeader>
         <Form horizontal onSubmit={this.submitFormHandler}>
-          {this.props.error &&
-          <Alert bsStyle="danger">{this.props.error.error}</Alert>
-          }
 
           <FormGroup>
             <Col smOffset={2} sm={10}>
-              <FacebookLogin />
+              <FacebookLogin
+                appId={config.facebookAppId}
+                fields="name,email,picture"
+                render={renderProps => (
+                  <Button onClick={renderProps.onClick}>Register with facebook</Button>
+                )}
+                callback={this.facebookResponse}
+              />
             </Col>
           </FormGroup>
 
@@ -45,7 +59,8 @@ class Login extends Component {
             type="text"
             value={this.state.username}
             changeHandler={this.inputChangeHandler}
-            autoComplete="current-username"
+            autoComplete="new-username"
+            error={this.fieldHasError('username') && this.props.error.errors.username.message}
           />
 
           <FormElement
@@ -55,7 +70,8 @@ class Login extends Component {
             type="password"
             value={this.state.password}
             changeHandler={this.inputChangeHandler}
-            autoComplete="current-password"
+            autoComplete="new-password"
+            error={this.fieldHasError('password') && this.props.error.errors.password.message}
           />
 
           <FormGroup>
@@ -63,7 +79,7 @@ class Login extends Component {
               <Button
                 bsStyle="primary"
                 type="submit"
-              >Login</Button>
+              >Register</Button>
             </Col>
           </FormGroup>
         </Form>
@@ -73,11 +89,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.users.loginError
+  error: state.users.registerError
 });
 
 const mapDispatchToProps = dispatch => ({
-  loginUser: userData => dispatch(loginUser(userData))
+  registerUser: userData => dispatch(registerUser(userData))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);
