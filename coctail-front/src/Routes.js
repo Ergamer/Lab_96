@@ -2,7 +2,7 @@ import React from 'react';
 import {Redirect, Route, Switch} from "react-router-dom";
 
 import NewCocktail from "./containers/NewCocktail/NewCocktail";
-// import Register from "./containers/Register/Register";
+import Register from "./containers/Register/Register";
 import Login from "./containers/Login/Login";
 import Cocktails from "./containers/Cocktails/Cocktails";
 import OneCocktail from "./containers/OneCocktail/OneCocktail";
@@ -23,7 +23,7 @@ const Routes = ({user}) => (
       />
       <Route path="/cocktails/:id" exact component={OneCocktail}/>
       <Route path="/editor/:id" exact component={CocktailEditorForm}/>
-      {/*<Route path="/register" exact component={Register}/>*/}
+      <Route path="/register" exact component={Register}/>
     <Route path="/login" exact component={Login}/>
   </Switch>
 );
