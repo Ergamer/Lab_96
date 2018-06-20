@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Panel} from "react-bootstrap";
 import {deleteOneCocktail, getOneCocktail} from "../../store/actions/cocktails";
 import {Link} from "react-router-dom";
+import './OneCocktail.css';
 
 
 class OneCocktail extends Component{
@@ -12,7 +13,6 @@ class OneCocktail extends Component{
     }
 
     render () {
-
         return (
                 <Panel>
             {this.props.cocktail ?
@@ -31,9 +31,10 @@ class OneCocktail extends Component{
                                     )
                                 })}
                             </div>
-                            <p>Recipe: {this.props.cocktail.recipe}</p>
-                            <button onClick={() => this.props.deleteOneCocktail(this.props.cocktail._id)}>Remove cocktail</button>
-                            <Link to={"/editor/" + this.props.cocktail._id}>Edit cocktail</Link>
+                            <p><b>Recipe:</b> {this.props.cocktail.recipe}</p>
+                            <button className="RemoverButton" onClick={() => this.props.deleteOneCocktail(this.props.cocktail._id)}
+                            >Remove cocktail</button>
+                            <Link className="LinkEditor" to={"/editor/" + this.props.cocktail._id}>Edit cocktail</Link>
                         </div>
                     </Panel.Body>: null
             }

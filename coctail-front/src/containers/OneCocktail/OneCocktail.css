@@ -1,0 +1,61 @@
+h1 {
+    font-size: 36px;
+    font-weight: bold
+}
+h2 {
+    font-size: 30px;
+    font-weight: bold
+}
+h3 {
+    font-size: 25px;
+    font-weight: bold
+}
+.RemoverButton {
+    display: inline-block;
+    width: 15em;
+    font-size: 80%;
+    color: rgba(255,255,255,.9);
+    text-shadow: #2e7ebd 0 1px 2px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.1;
+    white-space: pre-line;
+    margin-right: 20px;
+    padding: .7em 0;
+    border: 1px solid;
+    border-color: #60a3d8 #2970a9 #2970a9 #60a3d8;
+    border-radius: 6px;
+    outline: none;
+    background: #60a3d8 linear-gradient(#89bbe2, #60a3d8 50%, #378bce);
+    box-shadow: inset rgba(255,255,255,.5) 1px 1px;
+}
+.RemoverButton:first-line{
+    font-size: 170%;
+    font-weight: 700;
+}
+.RemoverButton:hover {
+    color: rgb(255,255,255);
+    background-image: linear-gradient(#9dc7e7, #74afdd 50%, #378bce);
+}
+.RemoverButton:active {
+    color: rgb(255,255,255);
+    border-color: #2970a9;
+    background-image: linear-gradient(#5796c8, #6aa2ce);
+    box-shadow: none;
+}
+.LinkEditor {
+    display: inline-block;
+    font-size: 20px;
+    border: 1px solid;
+    border-color: #60a3d8 #2970a9 #2970a9 #60a3d8;
+    border-radius: 6px;
+    padding: 4px 15px 0px 15px;
+    text-align: center;
+    width: 15%;
+    height: 38px;
+    text-decoration: none;
+}
+.LinkEditor:hover {
+    text-decoration: none;
+
+}
